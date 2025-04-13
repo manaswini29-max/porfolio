@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Manaswini - Personal Website</title>
   <style>
     body {
@@ -50,6 +50,31 @@
     a:hover {
       text-decoration: underline;
     }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      font-family: monospace;
+      font-size: 14px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #3286e0;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #1c4c80;
+    }
+
+    #output ul {
+      list-style-type: square;
+      margin-left: 20px;
+    }
   </style>
 </head>
 <body>
@@ -57,35 +82,30 @@
   <header>
     <h1>Pabboju Manaswini</h1>
     <p>Welcome to my personal website</p>
-    <img src="images/profile.jpeg" alt="Profile Picture" class="profile">
+    <img src="images/profile.jpeg" alt="Profile Picture" class="profile" />
   </header>
 
-  <section style="background-image: url('images/me.jpeg'); background-repeat: no-repeat; background-size: 200px 200px; background-position:right; ">
+  <section style="background-image: url('images/me.jpeg'); background-repeat: no-repeat; background-size: 200px 200px; background-position:right;">
     <h2>About Me</h2>
-    <p>
-      Hello! My name is Pabboju Manaswini, and I’m passionate about technology, learning, and exploring new fields. 
-      I was born in Siddipet, Telangana, and I'm currently pursuing my B.Tech in Computer Science at IIIT Hyderabad.
-    </p>
-    <p>
-      This site is a small corner of the internet where I share my background, achievements, and skills.
-    </p>
+    <p>Hello! My name is Pabboju Manaswini, and I’m passionate about learning, and exploring new fields. 
+      I was born in Siddipet, Telangana, and I'm currently pursuing my B.Tech in Computer Science at IIIT Hyderabad.</p>
+    <p>This site is a small corner of the internet where I share my background, achievements, and skills.</p>
   </section>
 
-  <section style="background-image: url('images/india.jpeg'); background-repeat: no-repeat; background-size: 2000px 360px; ">
+  <section style="background-image: url('images/india.jpeg'); background-repeat: no-repeat; background-size: 2000px 360px;">
     <h2>My Birthplace - Siddipet</h2>
-    <img src="images/local1.jpeg" alt="Local Image 1" class="local-photo">
-    <img src="images/local2.jpeg" alt="Local Image 2" class="local-photo">
-    <img src="images/local3.jpeg" alt="Local Image 3" class="local-photo">
-    <img src="images/local4.jpeg" alt="Local Image 4" class="local-photo">
-    <img src="images/local5.jpg" alt="Local Image 5" class="local-photo">
-    
+    <img src="images/local1.jpeg" alt="Local Image 1" class="local-photo" />
+    <img src="images/local2.jpeg" alt="Local Image 2" class="local-photo" />
+    <img src="images/local3.jpeg" alt="Local Image 3" class="local-photo" />
+    <img src="images/local4.jpeg" alt="Local Image 4" class="local-photo" />
+    <img src="images/local5.jpg" alt="Local Image 5" class="local-photo" />
   </section>
 
   <section style="background-image: url('images/education.jpeg'); background-repeat: no-repeat; background-size: 200px 450px; background-position: right; background-color:rgb(180, 228, 247);">
     <h2>Education</h2>
     <ul>
       <li><strong>University:</strong> B.Tech in Computer Science, IIIT Hyderabad (Currently pursuing)</li>
-      <li><strong>High School:</strong> Sri Chaitanya School (Grades 8–12), Jawahar Navodaya Vidyalaya (Grades 6–7)
+      <li><strong>High School:</strong>
         <ul>
           <li>(6-7) Jawahar Navodaya Vidyalaya, Wargal, Telangana</li>
           <li>(8-10) Srichaitanya school, Kukatpally, Hyderabad, Telangana</li>
@@ -95,7 +115,7 @@
       <li><strong>Achievements:</strong> 
         <ul>
           <li>JEE MAINS AIR - 2809</li>
-          <li>JEE ADVANCED AIR - </li>
+          <li>JEE ADVANCED AIR - 8156</li>
           <li>Polytechnic State Rank - 19</li>
           <li>School Topper in Navodaya</li>
           <li>Regional Level Handball Player</li>
@@ -113,13 +133,105 @@
     </ul>
   </section>
 
-  <section style="background-image: url('images/cv.jpeg'); background-repeat: no-repeat; background-size: 2000px 200px; ">
+  <section style="background-image: url('images/cv.jpeg'); background-repeat: no-repeat; background-size: 2000px 200px;">
     <h2>My CV</h2>
-    <p>
-      Click here to download: 
+    <p>Click here to download: 
       <a href="cv/Manaswini_CV.pdf" target="_blank">My CV (PDF)</a>
     </p>
   </section>
+
+  <section style="background-color: rgb(230, 178, 223)">
+    <h2>Text Analyzer</h2>
+    <textarea id="textInput" rows="15" placeholder="Paste your text here with atleast 10000 words..."></textarea>
+    <br><br>
+    <button onclick="analyzeText()">Analyze Text</button>
+    <div id="output" style="margin-top: 20px;"></div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        function captureEvent(eventType, eventObject) {
+            const timestamp = new Date().toLocaleString();
+            const eventDetails = {
+                timestamp: timestamp,
+                eventType: eventType,
+                eventObject: eventObject
+            };
+            console.log(eventDetails);
+        }
+
+        captureEvent('view', 'page');
+
+        document.body.addEventListener('click', (event) => {
+            let eventObject = 'unknown';
+
+            if (event.target.tagName === 'IMG') eventObject = 'image';
+            else if (event.target.tagName === 'SELECT') eventObject = 'dropdown';
+            else if (event.target.tagName === 'A') eventObject = 'link';
+            else if (
+                ['P', 'SPAN', 'H1', 'H2', 'H3', 'H4', 'LI', 'STRONG'].includes(event.target.tagName)) {
+                eventObject = 'text';
+            }
+            else if (event.target.tagName === 'BUTTON') {
+            eventObject = 'button';
+        }
+
+            captureEvent('click', eventObject);
+        });
+    });
+
+    function analyzeText() {
+        const text = document.getElementById('textInput').value;
+
+        const letters = (text.match(/[a-zA-Z]/g) || []).length;
+        const words = (text.match(/\b\w+\b/g) || []).length;
+        const spaces = (text.match(/ /g) || []).length;
+        const newlines = (text.match(/\n/g) || []).length;
+        const specialSymbols = (text.match(/[^a-zA-Z0-9\s]/g) || []).length;
+
+        const tokens = text.toLowerCase().match(/\b\w+\b/g) || [];
+
+        const pronouns = ['i', 'me', 'we', 'us', 'you', 'he', 'him', 'she', 'her', 'it', 'they', 'them', 'my', 'our', 'your', 'his', 'its', 'their'];
+        const prepositions = ['in', 'on', 'at', 'by', 'for', 'with', 'about', 'against', 'between', 'into', 'through', 'during', 'before', 'after', 'above', 'below', 'to', 'from', 'up', 'down', 'off', 'over', 'under'];
+        const articles = ['a', 'an'];
+
+        function countOccurrences(list) {
+            const map = {};
+            tokens.forEach(token => {
+                if (list.includes(token)) {
+                    map[token] = (map[token] || 0) + 1;
+                }
+            });
+            return map;
+        }
+
+        const pronounCount = countOccurrences(pronouns);
+        const prepositionCount = countOccurrences(prepositions);
+        const articleCount = countOccurrences(articles);
+
+        let outputHtml = `
+          <h3>Basic Stats</h3>
+          <ul>
+            <li><strong>Letters:</strong> ${letters}</li>
+            <li><strong>Words:</strong> ${words}</li>
+            <li><strong>Spaces:</strong> ${spaces}</li>
+            <li><strong>Newlines:</strong> ${newlines}</li>
+            <li><strong>Special Symbols:</strong> ${specialSymbols}</li>
+          </ul>
+
+          <h3>Pronouns Count</h3>
+          <ul>${Object.entries(pronounCount).map(([k, v]) => `<li>${k}: ${v}</li>`).join('')}</ul>
+
+          <h3>Prepositions Count</h3>
+          <ul>${Object.entries(prepositionCount).map(([k, v]) => `<li>${k}: ${v}</li>`).join('')}</ul>
+
+          <h3>Indefinite Articles Count</h3>
+          <ul>${Object.entries(articleCount).map(([k, v]) => `<li>${k}: ${v}</li>`).join('')}</ul>
+        `;
+
+        document.getElementById('output').innerHTML = outputHtml;
+    }
+  </script>
 
 </body>
 </html>
